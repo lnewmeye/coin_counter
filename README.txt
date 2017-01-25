@@ -3,4 +3,4 @@ Coin Counter Project
 
 Contributers:
 Luke Newmeyer
-James Swift
+James Swift the great
