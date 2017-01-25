@@ -22,34 +22,36 @@ typedef enum COIN_TYPE_E {
 class coin
 {
 public:
-	/** Current location of coin in image */
-	cv::Point center;
-	/** Coin Type */
-	COIN_TYPE_T type;
-
 	/** Constructor */
 	coin();
 	/** Destructor */
 	~coin();
 
 	/** Add coin prediction from circle*/
-	void coin::addPrediction(cv::Vec3f circle);
+	void coin::add_prediction(COIN_TYPE_T type);
 
 	/** Get coin type */
-	COIN_TYPE_T coin::getCoinType();
+	COIN_TYPE_T coin::get_coin_type();
+
+	/** Set coin location */
+	void coin::set_location(cv::Point newLocation );
+
+	/** Get coin location */
+	cv::Point coin::get_location();
 
 private:
+	/** Current location of coin in image */
+	cv::Point location;
+	/** Coin Type */
+	COIN_TYPE_T type;
 	/** History of times this coin looked like a quarter */
-	int numQ = 0;
+	int m_numQ = 0;
 	/** History of times this coin looked like a dime */
-	int numD = 0;
+	int m_numD = 0;
 	/** History of times this coin looked like a nickle */
-	int numN = 0;
+	int m_numN = 0;
 	/** History of times this coin looked like a penny */
-	int numP = 0;
-	/** Update type based on a newly detected type */
-	void coin::updateType(COIN_TYPE_T newlyDetectedType);
+	int m_numP = 0;
 };
-
 
 #endif //__COIN_H__

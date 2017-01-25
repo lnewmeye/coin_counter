@@ -18,7 +18,7 @@ using namespace std;
 /****************************** Private Variables ****************************/
 
 /****************************** Private Functions ****************************/
-static void main_UsageDescription(void);
+static void usage_description(void);
 
 /****************************** Function Implementation **********************/
 int main(int argc, char **argv)
@@ -53,13 +53,13 @@ int main(int argc, char **argv)
 	}
 	else {
 		cout << "Error: Invalid number of arguments (" << argc << ")\n";
-		main_UsageDescription();
+		usage_description();
 	}
 
     return 0;
 }
 
-static void main_UsageDescription(void)
+static void usage_description(void)
 {
 	cout << "Usage: CoinCounter\n";
 	cout << "  This will open the first camera and count coins on a conveyer\n";

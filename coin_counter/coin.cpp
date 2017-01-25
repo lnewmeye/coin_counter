@@ -7,15 +7,9 @@
 #include "coin.h"
 
 /****************************** Definitions **********************************/
-#define COIN_QUARTER_SIZE 25.0
-#define COIN_DIME_SIZE 15.0
-#define COIN_NICKLE_SIZE 21.0
-#define COIN_PENNY_SIZE 18.0
-
 /****************************** Private Variables ****************************/
 /****************************** Private Functions ****************************/
 /****************************** Function Implementation **********************/
-
 
 coin::coin()
 {
@@ -25,62 +19,56 @@ coin::~coin()
 {
 }
 	
-void coin::addPrediction(cv::Vec3f circle)
-{
-	//get circle info
-	cv::Point circleCenter(cvRound(circle[0]), cvRound(circle[1]));
-	int radius = cvRound(circle[2]);
-
-	//make prediction (TODO: add function to make prediction)
-	COIN_TYPE_T coinType = COIN_TYPE_QUARTER;
-
-	//update center location
-	center = circleCenter;
-
-	//update if different 
-	updateType(coinType);
-}
-
-COIN_TYPE_T coin::getCoinType()
-{
-	return type;
-}
-
-void coin::updateType(COIN_TYPE_T newlyDetectedType)
+void coin::add_prediction(COIN_TYPE_T type)
 {
 	//update counts
 	switch (type) {
 	case COIN_TYPE_QUARTER:
-		numQ++;
+		m_numQ++;
 		break;
 	case COIN_TYPE_DIME:
-		numD++;
+		m_numD++;
 		break;
 	case COIN_TYPE_NICKLE:
-		numN++;
+		m_numN++;
 		break;
 	case COIN_TYPE_PENNY:
-		numP++;
+		m_numP++;
 		break;
 	}
 	
 	//update type
-	if ((numQ >= numD) &&
-		(numQ >= numN) &&
-		(numQ >= numP))
+	if ((m_numQ >= m_numD) &&
+		(m_numQ >= m_numN) &&
+		(m_numQ >= m_numP))
 		type = COIN_TYPE_QUARTER;
-	else if ((numD >= numQ) &&
-		(numD >= numN) &&
-		(numD >= numP))
+	else if ((m_numD >= m_numQ) &&
+		(m_numD >= m_numN) &&
+		(m_numD >= m_numP))
 		type = COIN_TYPE_DIME;
-	else if ((numN >= numQ) &&
-		(numN >= numD) &&
-		(numN >= numP))
+	else if ((m_numN >= m_numQ) &&
+		(m_numN >= m_numD) &&
+		(m_numN >= m_numP))
 		type = COIN_TYPE_NICKLE;
-	else if ((numP >= numQ) &&
-		(numP >= numD) &&
-		(numP >= numN))
+	else if ((m_numP >= m_numQ) &&
+		(m_numP >= m_numD) &&
+		(m_numP >= m_numN))
 		type = COIN_TYPE_PENNY;
 	else 
 		type = COIN_TYPE_UNKNOWN;
+}
+
+COIN_TYPE_T coin::get_coin_type()
+{
+	return type;
+}
+	
+void coin::set_location(cv::Point newLocation )
+{
+	location = newLocation;
+}
+
+cv::Point coin::get_location()
+{
+	return location;
 }

@@ -19,7 +19,6 @@ class coin_counter
 {
 public:
 /****************************** Attributes ***********************************/
-	//uint32 sum;
 	int total = 0;
 	int numQuarters = 0;
 	int numDimes = 0;
@@ -46,12 +45,13 @@ public:
 private:
 /****************************** Private Attributes ***************************/
 	std::vector<coin> m_countedCoins;
-	cv::Mat backgroundImg;
+	cv::Mat m_backgroundImg;
 
 /****************************** Private Methods ******************************/
-	void coin_counter::processCircles(std::vector<cv::Vec3f> circles);
-	void coin_counter::removePreviousCoins( std::vector<cv::Vec3f> coins, std::vector<coin> countedCoins);
-	void coin_counter::updateCoinCounts(void);
+    std::vector<coin> coin_counter::get_coins_in_img(cv::Mat inputImg);
+	void coin_counter::remove_previous_coins( std::vector<coin> coins );
+    void coin_counter::add_new_coins( std::vector<coin> coins );
+    void coin_counter::update_coin_counts(cv::Mat inImg);
 	void coin_counter::addTitle(cv::Mat img, std::string title, cv::Scalar color, int xLoc);
 };
 
