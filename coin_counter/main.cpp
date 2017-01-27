@@ -36,7 +36,11 @@ int main(int argc, char **argv)
 		//serve first image as background
 		Mat inImg;
 		camera >> inImg;
+		for (int i = 0; i < 5; i++) camera >> inImg;
 		cc.set_background(inImg);
+
+		for (int i = 0; i < 25; i++) camera >> inImg;
+		//for (int i = 0; i < 10; i++) camera >> inImg;
 
 		//serve remaining image into coin counter
 		while (!inImg.empty()) {

@@ -10,6 +10,20 @@
 #include "opencv\highgui.h"
 #include "typedefs.h"
 
+/****************************** Definitions **********************************/
+/*
+#define LARGER_THAN_COIN 5100.0
+#define QUARTER_SIZE_MIN 3900.0
+#define NICKLE_SIZE_MIN 2900.0
+#define PENNY_SIZE_MIN 1700.0
+#define DIME_SIZE_MIN 700.0
+*/
+#define LARGER_THAN_COIN 100000
+#define QUARTER_SIZE_MIN 550
+#define NICKLE_SIZE_MIN 300
+#define PENNY_SIZE_MIN 50
+#define DIME_SIZE_MIN 0
+
 typedef enum COIN_TYPE_E {
 	COIN_TYPE_QUARTER = 0,
 	COIN_TYPE_DIME,
@@ -19,6 +33,7 @@ typedef enum COIN_TYPE_E {
 	COIN_TYPE_NUMS
 } COIN_TYPE_T;
 
+/****************************** Class Definition *****************************/
 class coin
 {
 public:
@@ -28,7 +43,7 @@ public:
 	~coin();
 
 	/** Add coin prediction from circle*/
-	void coin::add_prediction(COIN_TYPE_T type);
+	void coin::add_area(int area);
 
 	/** Get coin type */
 	COIN_TYPE_T coin::get_coin_type();
@@ -38,20 +53,17 @@ public:
 
 	/** Get coin location */
 	cv::Point coin::get_location();
+	
+	/*** Debug: get avg area */
+	int coin::get_avg_area();
 
 private:
 	/** Current location of coin in image */
 	cv::Point location;
 	/** Coin Type */
 	COIN_TYPE_T type;
-	/** History of times this coin looked like a quarter */
-	int m_numQ = 0;
-	/** History of times this coin looked like a dime */
-	int m_numD = 0;
-	/** History of times this coin looked like a nickle */
-	int m_numN = 0;
-	/** History of times this coin looked like a penny */
-	int m_numP = 0;
+	/** Coin area history */
+	std::vector<int> areaHist;
 };
 
 #endif //__COIN_H__
