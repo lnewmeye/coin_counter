@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 	//check number of arguments
 	if (argc == (1)) {
 		//define the input source
-		VideoCapture camera("output.avi");
+		//VideoCapture camera("output.avi");
+		//VideoCapture camera("pic.bmp");
 		//VideoCapture camera;
 		//camera.open(0);
 
@@ -35,11 +36,14 @@ int main(int argc, char **argv)
 
 		//serve first image as background
 		Mat inImg;
-		camera >> inImg;
-		for (int i = 0; i < 5; i++) camera >> inImg;
+		//camera >> inImg;
+		//for (int i = 0; i < 5; i++) camera >> inImg;
+		inImg = imread("bkgnd.bmp", 1);
 		cc.set_background(inImg);
 
-		for (int i = 0; i < 25; i++) camera >> inImg;
+		inImg = imread("pic1.bmp", 1);
+		imshow("inim", inImg);
+		//for (int i = 0; i < 25; i++) camera >> inImg;
 		//for (int i = 0; i < 10; i++) camera >> inImg;
 
 		//serve remaining image into coin counter
@@ -49,9 +53,10 @@ int main(int argc, char **argv)
 			//break if user presses esc
 			if (waitKey() == 27) break;
 			//get new image
-			camera >> inImg;
+			//camera >> inImg;
+			break;
 		}
-
+		
 		//output total
 		cout << cc.total << "\n";
 	}

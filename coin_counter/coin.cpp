@@ -33,7 +33,9 @@ COIN_TYPE_T coin::get_coin_type()
 	}
 	area /= (double)areaHist.size();
 
-	if (area > QUARTER_SIZE_MIN)
+	if (area > QUARTER_SIZE_MAX)
+		type = COIN_TYPE_UNKNOWN;
+	else if (area > QUARTER_SIZE_MIN)
 		type = COIN_TYPE_QUARTER;
 	else if (area > NICKLE_SIZE_MIN)
 		type = COIN_TYPE_NICKLE;
