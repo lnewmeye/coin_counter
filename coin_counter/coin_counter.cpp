@@ -118,7 +118,7 @@ std::vector<coin> coin_counter::get_coins_in_img(cv::Mat& inputImg)
 	//threshold
 	Mat thresh;
 	threshold(grayImg, grayImg, THRES_INIT, 255, THRESH_BINARY);
-	imshow("ThreshImg", grayImg);
+	//imshow("ThreshImg", grayImg);
 
 	//distance transform
 	int i = 20;
@@ -126,8 +126,8 @@ std::vector<coin> coin_counter::get_coins_in_img(cv::Mat& inputImg)
 	distanceTransform(grayImg, distImg, DIST_L2, DIST_MASK_5);
 	threshold(distImg, distImg, i, 255, THRESH_BINARY);
 	distImg.convertTo(distImg, CV_8U);
-	imshow("Dist Demo", distImg);
-	waitKey();
+	//imshow("Dist Demo", distImg);
+	//waitKey();
 
 	//get connected components
 	Mat labelImg;
@@ -270,7 +270,7 @@ void coin_counter::update_coin_counts(cv::Mat& inImg)
 	addTitle(inImg, (string) text, Scalar(0, 0, 255), inImg.cols / 2, 0);
 
     //TODO: show image (should this be here???)
-	imshow(WINDOW_NAME, inImg);
+	//imshow(WINDOW_NAME, inImg);
 }
 
 void coin_counter::addTitle(cv::Mat& img, std::string& title, cv::Scalar& color, int xLoc, int row)
