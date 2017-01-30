@@ -6,8 +6,9 @@
 #ifndef __COIN_H__
 #define __COIN_H__
 
-#include "opencv2\opencv.hpp"
-#include "opencv\highgui.h"
+#include <opencv2/core.hpp>
+//#include "opencv2\opencv.hpp"
+//#include "opencv\highgui.h"
 #include "typedefs.h"
 
 /****************************** Definitions **********************************/
