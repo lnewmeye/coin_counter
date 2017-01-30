@@ -6,6 +6,8 @@
 #ifndef __COIN_H__
 #define __COIN_H__
 
+#include "stdafx.h"
+
 #include <opencv2/core.hpp>
 //#include "opencv2\opencv.hpp"
 //#include "opencv\highgui.h"
@@ -22,7 +24,7 @@
 #define QUARTER_SIZE_MAX 750
 #define QUARTER_SIZE_MIN 450
 #define NICKLE_SIZE_MIN 240
-#define PENNY_SIZE_MIN 112
+#define PENNY_SIZE_MIN 120
 #define DIME_SIZE_MIN 70
 
 typedef enum COIN_TYPE_E {

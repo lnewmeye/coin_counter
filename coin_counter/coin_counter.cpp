@@ -5,6 +5,7 @@
 * Copyright 2017
 ******************************************************************************/
 
+#include "stdafx.h"
 #include "coin_counter.h"
 
 // coin_counter constructor
@@ -87,11 +88,11 @@ vector<coin> coin_counter::find_coins(Mat image)
 #endif
 
 	// Erode image
-	Mat erodeImage;
+	/*Mat erodeImage;
 	cv::erode(thresholdImage, erodeImage, erodeKernel);
 #ifdef DEBUG_ERODE
 	cv::imshow(DEBUG_ERODE, erodeImage);
-#endif
+#endif*/
 
 	// Dilate image?
 	/*Mat dilateImage;
@@ -101,13 +102,23 @@ vector<coin> coin_counter::find_coins(Mat image)
 #endif*/
 
 	// Distance transform?
+	//distance transform
+	int i = 20;
+	Mat distImg;
+	distanceTransform(thresholdImage, distImg, cv::DIST_L2, cv::DIST_MASK_5);
+	cv::threshold(distImg, distImg, i, 255, cv::THRESH_BINARY);
+	distImg.convertTo(distImg, CV_8U);
+#ifdef DEBUG_DISTANCE
+	imshow(DEBUG_DISTANCE, distImg);
+#endif
+	//waitKey();
 
 	// Find connected components
 	Mat labelImage;
 	Mat stats;
 	Mat centroids;
 	vector<coin> coinsInImg;
-	cv::connectedComponentsWithStats(erodeImage, labelImage, stats, centroids, 8, 4);
+	cv::connectedComponentsWithStats(distImg, labelImage, stats, centroids, 8, 4);
 
 	// for each connected component not in the background (0)
 	for (int i = 1; i < stats.rows; i++) {
@@ -117,7 +128,7 @@ vector<coin> coin_counter::find_coins(Mat image)
 		int x = (int)centroids.at<double>(i, 0);
 		int y = (int)centroids.at<double>(i, 1);
 		//only look at coins that are fully in the image
-		if (y < ((roiImage.rows * 3) / 4)) {
+		if (y < ((roiImage.rows * 3) / 4)  && y > (roiImage.rows / 4)) {
 			//add found coins to this variable (like this)
 			coin newCoin;
 			newCoin.add_area(area);
@@ -265,16 +276,16 @@ void coin_counter::update_coin_counts(cv::Mat& inImg)
 
 	//add number of coins to screen
 	char text[255];
-	sprintf(text, "Quarters %d", numQuarters);
+	sprintf_s(text, "Quarters %d", numQuarters);
 	addTitle(inImg, (string)text, Scalar(0, 0, 255), 0, 0);
-	sprintf(text, "Dimes %d", numDimes);
+	sprintf_s(text, "Dimes %d", numDimes);
 	addTitle(inImg, (string)text, Scalar(0, 0, 255), 0, 1);
-	sprintf(text, "Nickles %d", numNickles);
+	sprintf_s(text, "Nickles %d", numNickles);
 	addTitle(inImg, (string)text, Scalar(0, 0, 255), 0, 2);
-	sprintf(text, "Pennies %d", numPennies);
+	sprintf_s(text, "Pennies %d", numPennies);
 	addTitle(inImg, (string)text, Scalar(0, 0, 255), 0, 3);
 	//add total to screen
-	sprintf(text, "Total $%d.%2d", total / 100, total % 100);
+	sprintf_s(text, "Total $%d.%2d", total / 100, total % 100);
 	addTitle(inImg, (string)text, Scalar(0, 0, 255), inImg.cols / 2, 0);
 
 	//TODO: show image (should this be here???)

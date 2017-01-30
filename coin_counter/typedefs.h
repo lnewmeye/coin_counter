@@ -6,6 +6,8 @@
 #ifndef __TYPEDEFS_H__
 #define __TYPEDEFS_H__
 
+#include "stdafx.h"
+
 typedef char int8;
 typedef unsigned char uint8;
 typedef short int16;

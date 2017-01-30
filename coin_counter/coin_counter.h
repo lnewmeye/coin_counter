@@ -6,6 +6,8 @@
 #ifndef __COIN_COUNTER_H__
 #define __COIN_COUNTER_H__
 
+#include "stdafx.h"
+
 #include <vector>
 #include <string>
 #include <opencv2/core.hpp>
@@ -31,19 +33,19 @@ using cv::Size;
 #define DEBUG // This should be uncommented if any of the options below are
 //#define DEBUG_TRACK DEBUG_WINDOW_2
 //#define DEBUG_THRESHOLD DEBUG_WINDOW_1
-#define DEBUG_ERODE DEBUG_WINDOW_1
+//#define DEBUG_ERODE DEBUG_WINDOW_1
 //#define DEBUG_DILATE DEBUG_WINDOW_2
-//#define DEBUG_DISTANCE DEBUG_WINDOW_2
+#define DEBUG_DISTANCE DEBUG_WINDOW_2
 
 // Include iostream for debug (when defined)
 #ifdef DEBUG
 #include <iostream>
 #endif
 
-#define TRACK_LEFT 130 // Track edge left
-#define TRACK_RIGHT 510 // Track edge Right
+#define TRACK_LEFT 160 // Track edge left
+#define TRACK_RIGHT 500 // Track edge Right
 
-#define THRESHOLD_LEVEL 40 // Value between 0 and 255
+#define THRESHOLD_LEVEL 20 // Value between 0 and 255
 
 #define MAX_DIFF_BETWEEN_FRAMES_X 20
 #define MAX_DIFF_BETWEEN_FRAMES_Y -60
